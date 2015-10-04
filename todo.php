@@ -35,7 +35,7 @@ function todo_js($hook) {
 function todo_dashboard_widget_setup() {
 	$dashboard_options = get_option( 'dashboard_widget_options' );
 	global $current_user;
-	$new_array = array_intersect( $current_user->roles, $dashboard_options['todo_options']['todo_role_limit'] );
+	if( !empty( $dashboard_options['todo_options']['todo_role_limit'] ) ) $new_array = array_intersect( $current_user->roles, $dashboard_options['todo_options']['todo_role_limit'] );
 	if( ( !empty( $dashboard_options['todo_options']['todo_role_limit'] ) AND !empty( $new_array ) ) OR current_user_can( 'manage_options' ) ) {
 		wp_add_dashboard_widget(
 			'todo-widget',			// Widget slug (handle). This will be used as its css ID and its key in the array of widgets.
